@@ -8,9 +8,9 @@ const skillCategories = [
     color: "text-primary",
     bgColor: "bg-primary/10",
     skills: [
-      { name: "Java", level: 85 },
-      { name: "Python", level: 80 },
-      { name: "SQL", level: 75 },
+      { name: "Java", level: "Advanced", description: "Object-oriented programming, data structures" },
+      { name: "Python", level: "Intermediate", description: "Automation, data analysis, machine learning basics" },
+      { name: "SQL", level: "Intermediate", description: "Database queries, data manipulation" },
     ]
   },
   {
@@ -19,9 +19,9 @@ const skillCategories = [
     color: "text-success",
     bgColor: "bg-success/10",
     skills: [
-      { name: "MySQL", level: 80 },
-      { name: "MySQL Workbench", level: 75 },
-      { name: "Jupyter Notebook", level: 85 },
+      { name: "MySQL", level: "Intermediate", description: "Database design, optimization, complex queries" },
+      { name: "MySQL Workbench", level: "Intermediate", description: "Database administration and design" },
+      { name: "Jupyter Notebook", level: "Advanced", description: "Data analysis, prototyping, documentation" },
     ]
   },
   {
@@ -30,9 +30,9 @@ const skillCategories = [
     color: "text-accent",
     bgColor: "bg-accent/10",
     skills: [
-      { name: "GitHub", level: 90 },
-      { name: "VS Code", level: 95 },
-      { name: "Git Version Control", level: 85 },
+      { name: "GitHub", level: "Advanced", description: "Version control, collaboration, project management" },
+      { name: "VS Code", level: "Expert", description: "Code editing, debugging, extensions" },
+      { name: "Git Version Control", level: "Advanced", description: "Branching, merging, distributed workflows" },
     ]
   },
   {
@@ -41,30 +41,36 @@ const skillCategories = [
     color: "text-purple-600",
     bgColor: "bg-purple-100",
     skills: [
-      { name: "Data Structures", level: 80 },
-      { name: "DBMS", level: 75 },
-      { name: "Power Electronics", level: 85 },
-      { name: "Renewable Energy", level: 90 },
+      { name: "Data Structures", level: "Intermediate", description: "Algorithms, problem-solving, optimization" },
+      { name: "DBMS", level: "Intermediate", description: "Database concepts, normalization, transactions" },
+      { name: "Power Electronics", level: "Advanced", description: "Circuit design, energy conversion systems" },
+      { name: "Renewable Energy", level: "Expert", description: "Sustainable systems, energy storage, innovation" },
     ]
   }
 ];
 
-const SkillBar = ({ skill, delay = 0 }: { skill: { name: string; level: number }; delay?: number }) => {
+const SkillCard = ({ skill, delay = 0 }: { skill: { name: string; level: string; description: string }; delay?: number }) => {
+  const getLevelColor = (level: string) => {
+    switch (level) {
+      case "Expert": return "bg-green-100 text-green-800 border-green-200";
+      case "Advanced": return "bg-blue-100 text-blue-800 border-blue-200";
+      case "Intermediate": return "bg-yellow-100 text-yellow-800 border-yellow-200";
+      default: return "bg-gray-100 text-gray-800 border-gray-200";
+    }
+  };
+
   return (
-    <div className="mb-4" style={{ animationDelay: `${delay}s` }}>
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-sm font-medium text-foreground">{skill.name}</span>
-        <span className="text-sm text-muted-foreground">{skill.level}%</span>
+    <div 
+      className="p-4 bg-background rounded-lg border border-border hover:shadow-md transition-all duration-300"
+      style={{ animationDelay: `${delay}s` }}
+    >
+      <div className="flex justify-between items-start mb-2">
+        <h4 className="font-medium text-foreground">{skill.name}</h4>
+        <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getLevelColor(skill.level)}`}>
+          {skill.level}
+        </span>
       </div>
-      <div className="w-full bg-muted rounded-full h-2">
-        <div 
-          className="h-2 bg-gradient-primary rounded-full transition-all duration-1000 ease-out"
-          style={{ 
-            width: `${skill.level}%`,
-            animationDelay: `${delay}s`
-          }}
-        ></div>
-      </div>
+      <p className="text-sm text-muted-foreground leading-relaxed">{skill.description}</p>
     </div>
   );
 };
@@ -97,9 +103,9 @@ const Skills = () => {
                   <h3 className="text-xl font-semibold text-foreground">{category.title}</h3>
                 </div>
                 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {category.skills.map((skill, skillIndex) => (
-                    <SkillBar 
+                    <SkillCard 
                       key={skill.name} 
                       skill={skill} 
                       delay={categoryIndex * 0.2 + skillIndex * 0.1}

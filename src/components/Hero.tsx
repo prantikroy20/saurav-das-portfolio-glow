@@ -1,6 +1,6 @@
 import { Mail, Phone, MapPin, Github, Linkedin, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import profileImage from '@/assets/saurav-profile.jpg';
+// Using uploaded profile image
 
 const Hero = () => {
   return (
@@ -102,8 +102,8 @@ const Hero = () => {
             <div className="relative">
               <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl float">
                 <img 
-                  src={profileImage} 
-                  alt="Saurav Das"
+                  src="/lovable-uploads/e875fa60-ce00-46c5-abee-42ece74386f5.png" 
+                  alt="Saurav Das - Electrical Engineering Student"
                   className="w-full h-full object-cover"
                 />
               </div>
