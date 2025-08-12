@@ -53,7 +53,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button 
                 size="lg" 
-                className="bg-white text-primary hover:bg-blue-50 hover-glow transition-all duration-300"
+                className="bg-white text-primary hover:bg-blue-50 hover-glow transition-all duration-300 transform hover:scale-105"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Get In Touch
@@ -61,7 +61,7 @@ const Hero = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-white text-white hover:bg-white/10 transition-all duration-300"
+                className="border-white text-white hover:bg-white hover:text-primary transition-all duration-300 transform hover:scale-105 hover:shadow-lg backdrop-blur-sm bg-white/10"
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 View Projects
